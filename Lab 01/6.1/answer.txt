@@ -1,0 +1,17 @@
+6.1
+Khi chọn cancel màn hình sẽ hiện ra một ô cửa sổ ghi you've choosen no
+Để tự thiết kế lựa chọn cho người dung thì ta cần phải sử dụng method showOptionDialog.
+Ví dụ ta muốn thay đổi thành 2 lựa chọn thành i do và i don't thì thực hiện các bước:
+Bước 1: khai báo 1 mảng String chứa lựa chọn cho người dùng: String[] options = {"I do", "I don't"}
+Bước 2: Sử dụng method showOptionDialog: int option = JOptionPane.showOptionDialog(
+						null,
+						"Do you want to change to the first class ticket?",
+						JOptionPane.YES_NO_OPTION,    
+						JOptionPane.QUESTION_MESSAGE, 
+						null,				
+						options			      
+						options[0]
+						);
+Bước 3: Sửa lại JOptionPane.showMessageDialog(null,"You've chosen: " + (option==JOptionPane.YES_OPTION?"Yes":"No")) thành
+		JOptionPane.showMessageDialog(null,"You've chosen: " + (option==JOptionPane.YES_OPTION?"I do":"I don't"));
+Khi chạy chương trình sẽ xuất hiện 1 cửa số với hai lựa chọn là "I do" và I don't
