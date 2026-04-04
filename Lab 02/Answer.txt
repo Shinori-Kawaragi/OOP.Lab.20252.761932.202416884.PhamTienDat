@@ -1,0 +1,1 @@
+Java cho phép điều này do một cái khởi tạo bằng title còn 1 cái khởi tạo bằng category nên chữ kĩ (signature) của chúng khác nhau, đây chính là chồng phương thức (overloading)
