@@ -1,0 +1,45 @@
+1.
+method addDVD sử dụng varargs:
+    public void addDVD(DVD...dvdList){
+        if(qtyOrdered == 20){
+            System.out.println("Gio da day");
+            return;
+        }
+        for(int i=0;i<dvdList.length;i++){
+            if((!checkDVD(dvdList[i].getId())) && qtyOrdered<20){
+                ordered[qtyOrdered++]=dvdList[i];
+                System.out.println("Them thanh cong");
+            }
+            else{
+                if(qtyOrdered==20){
+                    System.out.println("Gio da day");
+                    return;
+                }
+                else System.out.println("Da co dia nay");
+            }
+        }
+    }
+Java không cho nạp chồng phương thức này với addDVD(DVD[]dvdList) bởi vì java coi varargs cũng chính là một mảng khiến cho signature của 2 method bị trùng nhau nên không overload được
+Em thấy dùng varargs sẽ tiện hơn vì nó cho phép tham số nhập vào là 1 mảng hoặc 1 số lượng dvd nhất định như addDVD(dvd1,dvd2,dvd3)
+2.
+Java là ngôn ngữ pass by value
+Khi sử dụng hàm swap thì o1 sẽ chứa địa chỉ của jungleDVD còn o2 chứa địa chỉ cinderellaDVD những gì hàm swap làm chỉ là tráo đổi địa chỉ của o1 với o2 nên không thể đổi tên của hai đối tượng cho nhau
+Khi sử dụng hàm changeTitle thì dvd chứa địa chỉ của jungleDVD và thực hiện gọi method setTitle của đối tượng jungleDVD làm cho tên của jungleDVD bị thay đổi, còn lệnh dvd=new DigitalVideoDisc(oldTitle) bên dưới chỉ là thay đổi địa chỉ của dvd thành một địa chỉ khác nên không gây ảnh hưởng gì đến jungleDVD
+Hàm swap đúng:
+    public static void swapReal(DVD o1, DVD o2){
+        String tmp = o1.getTitle();
+        o1.setTitle(o2.getTitle());
+        o2.setTitle(tmp);
+        String tmp1 = o1.getCategory();
+        o1.setCategory(o2.getCategory());
+        o2.setCategory(tmp1);
+        String tmp2=o1.getDirector();
+        o1.setDirector(o2.getDirector());
+        o2.setDirector(tmp2);
+        int tmp3=o1.getLength();
+        o1.setLength(o2.getLength());
+        o2.setLength(tmp3);
+        float tmp4=o1.getPrice();
+        o1.setPrice(o2.getPrice());
+        o2.setPrice(tmp4);
+    }
