@@ -1,0 +1,41 @@
+1. Class media sẽ implement Comparable interface
+2. 
+Nếu muốn sắp xếp theo CostTitle:
+public int compareTo(Media other){
+	int tmp = this.getTitle().compareToIgnoreCase(other.getTitle());
+        if(this.getPrice() > other.getPrice()) return 1;
+        else if(this.getPrice() == other.getPrice()){
+            return tmp;
+        }
+        return -1;
+}
+Nếu muốn sắp xếp theo TitleCost:
+public int compareTo(Media other){
+	int tmp = this.getTitle().compareToIgnoreCase(other.getTitle());
+        if(tmp != 0) return tmp;
+        return Float.compare(this.getPrice(),other.getPrice());
+}
+3.
+Ta không thể có 2 cách sắp xếp vì method compareTo chỉ có thể được override 1 lần với cùng 1 signature
+4.
+public int compareTo(Media other){
+	int tmp = this.getTitle().compareToIgnoreCase(other.getTitle());
+        if(tmp != 0) return tmp;
+	if(this instanceof DVD && other instanceof DVD){
+		DVD thisDVD = (DVD)this;
+		DVD otherDVD = (DVD)other;
+		int tmp1 = Integer.compare(thisDVD.getLength(),otherDVD.getLength());
+		if(tmp1!=0) return -tmp1;
+	}
+        return Float.compare(this.getPrice(),other.getPrice());
+}
+
+
+Aggregates: AIMS -> Cart & Store, Cart -> Media, Store -> Media, CD -> Track
+Các list đều đã được khởi tạo
+
+Polymorphism
+Đoạn code này sẽ in ra giá trị toString trả về tưởng ứng với các class là cd, dvd, book
+Giải thích: Đây chính là liên kết động, mặc dù dù m là class Media nhưng bản chất thật của nó lại là các class hoặc cd hoặc dvd hoặc book. Java sẽ truy cập vào class này và gọi method toString() tương ứng của chúng.
+
+Nếu Object o không phải là instance của Media/Track thì hàm sẽ trả về kết quả là false do em đã sử dụng điểu kiện kiểm tra là !(o instance of Media/Track)
